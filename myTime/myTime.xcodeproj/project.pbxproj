@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70CC53D17DBE6A800F3A393 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D70CC53C17DBE6A800F3A393 /* CoreData.framework */; };
+		D70CC54117DBE6FC00F3A393 /* myTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D70CC53F17DBE6FC00F3A393 /* myTime.xcdatamodeld */; };
+		D70CC54517DBE9E200F3A393 /* TimeSheetEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D70CC54417DBE9E200F3A393 /* TimeSheetEntry.m */; };
+		D70CC54817DBEA0E00F3A393 /* DBUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D70CC54717DBEA0E00F3A393 /* DBUtil.m */; };
 		D72A842617D8598D002E3E60 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72A842517D8598D002E3E60 /* UIKit.framework */; };
 		D72A842817D8598D002E3E60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72A842717D8598D002E3E60 /* Foundation.framework */; };
 		D72A842A17D8598D002E3E60 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72A842917D8598D002E3E60 /* CoreGraphics.framework */; };
@@ -22,6 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70CC53C17DBE6A800F3A393 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D70CC54017DBE6FC00F3A393 /* myTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myTime.xcdatamodel; sourceTree = "<group>"; };
+		D70CC54317DBE9E200F3A393 /* TimeSheetEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSheetEntry.h; sourceTree = "<group>"; };
+		D70CC54417DBE9E200F3A393 /* TimeSheetEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSheetEntry.m; sourceTree = "<group>"; };
+		D70CC54617DBEA0E00F3A393 /* DBUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUtil.h; sourceTree = "<group>"; };
+		D70CC54717DBEA0E00F3A393 /* DBUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBUtil.m; sourceTree = "<group>"; };
 		D72A842117D8598D002E3E60 /* myTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72A842517D8598D002E3E60 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D72A842717D8598D002E3E60 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D70CC53D17DBE6A800F3A393 /* CoreData.framework in Frameworks */,
 				D72A842617D8598D002E3E60 /* UIKit.framework in Frameworks */,
 				D72A842817D8598D002E3E60 /* Foundation.framework in Frameworks */,
 				D72A842A17D8598D002E3E60 /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +67,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D70CC54217DBE7CC00F3A393 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D70CC54317DBE9E200F3A393 /* TimeSheetEntry.h */,
+				D70CC54417DBE9E200F3A393 /* TimeSheetEntry.m */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		D72A841617D8598D002E3E60 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +96,7 @@
 		D72A842417D8598D002E3E60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D70CC53C17DBE6A800F3A393 /* CoreData.framework */,
 				D72A842517D8598D002E3E60 /* UIKit.framework */,
 				D72A842717D8598D002E3E60 /* Foundation.framework */,
 				D72A842917D8598D002E3E60 /* CoreGraphics.framework */,
@@ -86,6 +107,7 @@
 		D72A842B17D8598D002E3E60 /* myTime */ = {
 			isa = PBXGroup;
 			children = (
+				D70CC54217DBE7CC00F3A393 /* Entities */,
 				D72A843417D8598D002E3E60 /* AppDelegate.h */,
 				D72A843517D8598D002E3E60 /* AppDelegate.m */,
 				D72A843D17D8598D002E3E60 /* MainStoryboard.storyboard */,
@@ -94,6 +116,9 @@
 				D78711AC17D85DC2006CF12D /* ProjectSummaryViewController.m */,
 				D78711B217D861FB006CF12D /* ActivityViewController.h */,
 				D78711B317D861FB006CF12D /* ActivityViewController.m */,
+				D70CC53F17DBE6FC00F3A393 /* myTime.xcdatamodeld */,
+				D70CC54617DBEA0E00F3A393 /* DBUtil.h */,
+				D70CC54717DBEA0E00F3A393 /* DBUtil.m */,
 			);
 			path = myTime;
 			sourceTree = "<group>";
@@ -182,6 +207,9 @@
 				D72A843617D8598D002E3E60 /* AppDelegate.m in Sources */,
 				D78711AD17D85DC2006CF12D /* ProjectSummaryViewController.m in Sources */,
 				D78711B417D861FB006CF12D /* ActivityViewController.m in Sources */,
+				D70CC54117DBE6FC00F3A393 /* myTime.xcdatamodeld in Sources */,
+				D70CC54517DBE9E200F3A393 /* TimeSheetEntry.m in Sources */,
+				D70CC54817DBEA0E00F3A393 /* DBUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +333,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D70CC53F17DBE6FC00F3A393 /* myTime.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D70CC54017DBE6FC00F3A393 /* myTime.xcdatamodel */,
+			);
+			currentVersion = D70CC54017DBE6FC00F3A393 /* myTime.xcdatamodel */;
+			path = myTime.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D72A841817D8598D002E3E60 /* Project object */;
 }

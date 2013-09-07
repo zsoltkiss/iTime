@@ -7,6 +7,11 @@
 //
 
 #import "ActivityViewController.h"
+#import "TimeSheetEntry.h"
+#import "DBUtil.h"
+
+#define STATUS_DESC_WORKING @"WORK START"
+#define STATUS_DESC_AWAY @"WORK STOP"
 
 typedef enum {
     kActivityStatusAway,
@@ -24,12 +29,27 @@ typedef enum {
 
 - (IBAction)changeMyStatus:(id)sender;
 
-
+- (void)createNewEntry;
 @end
 
 @implementation ActivityViewController
 
 #pragma mark - private methods
+
+- (void)createNewEntry {
+    
+    TimeSheetEntry *newEntry = [DBUtil timeSheetEntryForCreate];
+    [newEntry setSubtask:_tvSubtask.text];
+    [newEntry setProject:_tfProject.text];
+    [newEntry setActivityTime:[NSDate date]];
+    [newEntry setActivityDesc:(_currentActivityStatus == kActivityStatusWorkingOnProject) ? STATUS_DESC_WORKING : STATUS_DESC_AWAY];
+    
+    NSError *persistError;
+    BOOL success = [DBUtil persistInContext:[DBUtil getContext] useError:&persistError];
+    
+    NSLog(@"success: %d, error? %@", success, persistError);
+    
+}
 
 - (NSString *)pathToDocumentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -42,7 +62,7 @@ typedef enum {
 
 - (IBAction)changeMyStatus:(id)sender {
     
-    NSDate *now = [NSDate date];
+//    NSDate *now = [NSDate date];
     
     if(_currentActivityStatus == kActivityStatusAway) {
         
@@ -57,7 +77,15 @@ typedef enum {
         [_btnActivity setTitle:@"Folytatom a munkát" forState:UIControlStateNormal];
     }
     
-    [self createEntryWithDate:now];
+//    [self createEntryWithDate:now];
+    
+    if(_tfProject.text.length > 0 && _tvSubtask.text.length > 0) {
+        [self createNewEntry];
+    } else {
+        UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Hiányos adatok" message:@"Project vagy subtask hiányzik." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [av show];
+    }
     
 }
 
@@ -110,6 +138,8 @@ typedef enum {
     } else if(_currentActivityStatus == kActivityStatusWorkingOnProject) {
         [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
     }
+    
+    _tvSubtask.text = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
