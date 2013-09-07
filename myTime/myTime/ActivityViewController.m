@@ -108,7 +108,16 @@ typedef enum {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:fullPath]) {
-        [newEntry writeToFile:fullPath atomically:YES];
+        NSError *error;
+        
+        [newEntry writeToFile:fullPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        
+        if(error) {
+            UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Hiba" message:@"Nem sikerült rögzíteni a változást" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [av show];
+        }
+        
     } else
     {
         NSFileHandle *myHandle = [NSFileHandle fileHandleForWritingAtPath:fullPath];
