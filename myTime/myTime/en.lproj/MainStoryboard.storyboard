@@ -38,7 +38,7 @@
         <scene sceneID="Awt-uh-PG8">
             <objects>
                 <tabBarController title="iTime" definesPresentationContext="YES" id="rpf-rh-efn" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="CA8-j7-d0w">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -77,6 +77,9 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cS6-5Q-dC8">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="268-o1-JZD"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iEB-yc-Ot7">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,6 +108,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YLZ-ot-gcc" firstAttribute="trailing" secondItem="HYg-U6-Mup" secondAttribute="trailing" type="default" id="19Q-bw-QnG"/>
                             <constraint firstAttribute="trailing" secondItem="iEB-yc-Ot7" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3oT-QP-gkA"/>
@@ -120,6 +124,9 @@
                             <constraint firstItem="HYg-U6-Mup" firstAttribute="top" secondItem="3" secondAttribute="top" constant="50" id="mFS-wa-kkv"/>
                             <constraint firstItem="cS6-5Q-dC8" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nF2-CQ-lQK"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GcK-2W-wAT" appends="YES" id="Dss-F4-5tI"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Activity" id="tuB-01-ceO"/>
                     <connections>
@@ -129,10 +136,33 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GcK-2W-wAT">
+                    <connections>
+                        <action selector="viewTapped:" destination="2" id="NcG-90-iIK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1232" y="-601"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="ActivityViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="changeMyStatus:"/>
+                <relationship kind="action" name="viewTapped:" candidateClass="UITapGestureRecognizer"/>
+                <relationship kind="outlet" name="_btnActivity" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="_tfProject" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_tvSubtask" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ProjectSummaryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectSummaryViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -24,6 +24,7 @@ typedef enum {
 
 - (IBAction)changeMyStatus:(id)sender;
 
+- (IBAction)viewTapped:(UITapGestureRecognizer *)sender;
 
 @end
 
@@ -59,6 +60,11 @@ typedef enum {
     
     [self createEntryWithDate:now];
     
+}
+
+- (IBAction)viewTapped:(UITapGestureRecognizer *)sender {
+    
+    [self.view endEditing:YES];
 }
 
 - (void)createEntryWithDate:(NSDate *)someDate {
@@ -103,6 +109,9 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _tvSubtask.text = nil;
+    
 	
     if(_currentActivityStatus == kActivityStatusAway) {
         [_btnActivity setTitle:@"Folytatom a munkát" forState:UIControlStateNormal];
@@ -113,13 +122,18 @@ typedef enum {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
 }
+
+
+
 
 @end
