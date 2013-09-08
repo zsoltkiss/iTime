@@ -16,3 +16,11 @@
 
 
 #define FILE_STORAGE @"iTime.txt"
+#define STATUS_DESC_WORKING @"WORK START"
+#define STATUS_DESC_AWAY @"WORK STOP"
+
+#define BACKGROUND_COLOR_WHEN_WORKING [UIColor redColor]
+#define BACKGROUND_COLOR_WHEN_AWAY [UIColor greenColor]
+
+#define ALPHA_WHEN_WORKING 0.4f
+#define ALPHA_WHEN_AWAY 1.0f

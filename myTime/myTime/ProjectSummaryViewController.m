@@ -7,7 +7,8 @@
 //
 
 #import "ProjectSummaryViewController.h"
-
+#import "DBUtil.h"
+#import "TimeSheetEntry.h"
 
 
 @interface ProjectSummaryViewController () {
@@ -15,6 +16,10 @@
 }
 
 - (void)readTimesheetFile;
+
+- (void)readEntriesFromDatabase;
+
+- (int)sumWorkHours;
 
 @end
 
@@ -30,16 +35,70 @@
     
 }
 
+- (int)sumWorkHours {
+
+    double sumInSeconds;
+    
+    BOOL calculateStarted = NO;
+    
+    NSDate *start, *stop;
+    for(TimeSheetEntry *entry in _entries) {
+        
+        if(calculateStarted) {
+            if([entry.activityDesc isEqualToString:STATUS_DESC_WORKING]) {
+                start = entry.activityTime;
+            } else if([entry.activityDesc isEqualToString:STATUS_DESC_AWAY]) {
+                stop = entry.activityTime;
+            }
+            
+            if(start != nil && stop != nil) {
+                NSTimeInterval secondsBetweenStartAndStop = [start timeIntervalSinceDate:stop];
+                sumInSeconds += secondsBetweenStartAndStop;
+                
+                start = nil;
+                stop = nil;
+            }
+            
+        } else {
+            if([entry.activityDesc isEqualToString:STATUS_DESC_AWAY]) {
+                stop = entry.activityTime;
+                
+                calculateStarted = YES;
+            }
+        }
+        
+        
+    }
+    
+    sumInSeconds = (sumInSeconds < 0) ? -1 * sumInSeconds : sumInSeconds;
+    
+    NSLog(@"Sum in seconds: %f ", sumInSeconds);
+    int numberOfFullHours = sumInSeconds / (60 * 60);
+    
+    NSLog(@"Sum in HOURS: %d ", numberOfFullHours);
+    
+    return numberOfFullHours;
+}
+
+- (void)readEntriesFromDatabase {
+    if(_entries != nil) {
+        _entries = nil;
+    }
+    
+    NSArray *tmpArray = [DBUtil retrieveAllEntries];
+    
+    NSSortDescriptor *sdesc = [[NSSortDescriptor alloc]initWithKey:@"activityTime" ascending:NO];
+    
+    _entries = [tmpArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sdesc]];
+    
+}
+
 - (void)readTimesheetFile {
     if(_entries != nil) {
         _entries = nil;
     }
     
-//    NSMutableArray *tmpArray = [NSMutableArray array];
-    
     NSString *fullPath = [[self pathToDocumentsDirectory] stringByAppendingPathComponent:FILE_STORAGE];
-    
-    
     
     NSFileManager *manager = [NSFileManager defaultManager];
     
@@ -78,15 +137,13 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self readTimesheetFile];
+//    [self readTimesheetFile];
+    [self readEntriesFromDatabase];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -100,7 +157,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return [_entries count];
+    return [_entries count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,12 +165,35 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
     if(cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [_entries objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:11];
+    
+    if(indexPath.row == 0) {
+        //Zeroth row should have a summary cell...
+        
+        int sumHours = [self sumWorkHours];
+        int sumMoneyInHUF = sumHours * 20 * 220;
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"Sum hours: %d. Sum money: %d", sumHours, sumMoneyInHUF];
+        
+    } else {
+    
+        TimeSheetEntry *entry = [_entries objectAtIndex:indexPath.row - 1];
+        
+        NSString *str = [NSString stringWithFormat:@"%@: %@", [df stringFromDate:entry.activityTime], entry.activityDesc];
+
+        cell.textLabel.text = str;
+        
+//        UIColor *bgColor = ([entry.activityDesc isEqualToString:STATUS_DESC_WORKING]) ? BACKGROUND_COLOR_WHEN_WORKING : BACKGROUND_COLOR_WHEN_AWAY;
+//        
+//        [cell setBackgroundColor:bgColor];
+    }
     
     return cell;
 }
@@ -161,13 +241,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+   
 }
 
 @end

@@ -40,4 +40,18 @@
     return (TimeSheetEntry *)mo;
 }
 
++ (NSArray *)retrieveAllEntries {
+    NSError *error;
+    
+    // Test listing all FailedBankInfos from the store
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeSheetEntry"
+                                              inManagedObjectContext:[DBUtil getContext]];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [[DBUtil getContext] executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedObjects;
+    
+}
+
 @end

@@ -10,8 +10,7 @@
 #import "TimeSheetEntry.h"
 #import "DBUtil.h"
 
-#define STATUS_DESC_WORKING @"WORK START"
-#define STATUS_DESC_AWAY @"WORK STOP"
+
 
 typedef enum {
     kActivityStatusAway,
@@ -63,29 +62,48 @@ typedef enum {
 
 - (IBAction)changeMyStatus:(id)sender {
     
-//    NSDate *now = [NSDate date];
-    
-    if(_currentActivityStatus == kActivityStatusAway) {
-        
-        _currentActivityStatus = kActivityStatusWorkingOnProject;
-        
-        [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
-        
-        
-    } else if(_currentActivityStatus == kActivityStatusWorkingOnProject) {
-        _currentActivityStatus = kActivityStatusAway;
-        
-        [_btnActivity setTitle:@"Folytatom a munkát" forState:UIControlStateNormal];
-    }
-    
-//    [self createEntryWithDate:now];
-    
-    if(_tfProject.text.length > 0 && _tvSubtask.text.length > 0) {
-        [self createNewEntry];
-    } else {
+    if(_tfProject.text.length == 0 || _tvSubtask.text.length == 0) {
         UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Hiányos adatok" message:@"Project vagy subtask hiányzik." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [av show];
+    } else {
+        
+        if(_currentActivityStatus == kActivityStatusAway) {
+            
+            _currentActivityStatus = kActivityStatusWorkingOnProject;
+            
+            _tfProject.userInteractionEnabled = NO;
+            _tvSubtask.userInteractionEnabled = NO;
+            
+            
+            _tfProject.alpha = ALPHA_WHEN_WORKING;
+            _tvSubtask.alpha = ALPHA_WHEN_WORKING;
+            
+            [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
+            
+            
+        } else if(_currentActivityStatus == kActivityStatusWorkingOnProject) {
+            _currentActivityStatus = kActivityStatusAway;
+            
+            _tfProject.text = nil;
+            _tvSubtask.text = nil;
+            
+            _tfProject.userInteractionEnabled = YES;
+            _tvSubtask.userInteractionEnabled = YES;
+            
+            _tfProject.alpha = ALPHA_WHEN_AWAY;
+            _tvSubtask.alpha = ALPHA_WHEN_AWAY;
+            
+            
+            [_btnActivity setTitle:@"Folytatom a munkát" forState:UIControlStateNormal];
+        }
+        
+        self.view.backgroundColor = (_currentActivityStatus == kActivityStatusWorkingOnProject) ? BACKGROUND_COLOR_WHEN_WORKING : BACKGROUND_COLOR_WHEN_AWAY;
+        
+        [self createNewEntry];
+        
+        
+        
     }
     
 }
@@ -157,7 +175,7 @@ typedef enum {
         [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
     }
     
-    _tvSubtask.text = nil;
+    self.view.backgroundColor = (_currentActivityStatus == kActivityStatusWorkingOnProject) ? BACKGROUND_COLOR_WHEN_WORKING : BACKGROUND_COLOR_WHEN_AWAY;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

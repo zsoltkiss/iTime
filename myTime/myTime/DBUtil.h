@@ -22,5 +22,6 @@
 
 + (TimeSheetEntry *)timeSheetEntryForCreate;
 
++ (NSArray *)retrieveAllEntries;
 
 @end
