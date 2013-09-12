@@ -23,7 +23,18 @@
 		D72A843F17D8598D002E3E60 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72A843D17D8598D002E3E60 /* MainStoryboard.storyboard */; };
 		D78711AD17D85DC2006CF12D /* ProjectSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78711AC17D85DC2006CF12D /* ProjectSummaryViewController.m */; };
 		D78711B417D861FB006CF12D /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78711B317D861FB006CF12D /* ActivityViewController.m */; };
+		D7CEC24217E269EF0029E716 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CEC24117E269BD0029E716 /* libMBProgressHUD.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7CEC24017E269BD0029E716 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7CEC23C17E269BD0029E716 /* MBProgressHUD.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D286A7491518C70F00E13FB8;
+			remoteInfo = MBProgressHUD;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D70CC53C17DBE6A800F3A393 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -50,6 +61,7 @@
 		D78711AC17D85DC2006CF12D /* ProjectSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSummaryViewController.m; sourceTree = "<group>"; };
 		D78711B217D861FB006CF12D /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		D78711B317D861FB006CF12D /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		D7CEC23C17E269BD0029E716 /* MBProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD.xcodeproj; path = myTime/MBProgressHUD/MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7CEC24217E269EF0029E716 /* libMBProgressHUD.a in Frameworks */,
 				D70CC53D17DBE6A800F3A393 /* CoreData.framework in Frameworks */,
 				D72A842617D8598D002E3E60 /* UIKit.framework in Frameworks */,
 				D72A842817D8598D002E3E60 /* Foundation.framework in Frameworks */,
@@ -79,6 +92,7 @@
 		D72A841617D8598D002E3E60 = {
 			isa = PBXGroup;
 			children = (
+				D7CEC23C17E269BD0029E716 /* MBProgressHUD.xcodeproj */,
 				D72A842B17D8598D002E3E60 /* myTime */,
 				D72A842417D8598D002E3E60 /* Frameworks */,
 				D72A842217D8598D002E3E60 /* Products */,
@@ -137,6 +151,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D7CEC23D17E269BD0029E716 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7CEC24117E269BD0029E716 /* libMBProgressHUD.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -176,12 +198,28 @@
 			mainGroup = D72A841617D8598D002E3E60;
 			productRefGroup = D72A842217D8598D002E3E60 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D7CEC23D17E269BD0029E716 /* Products */;
+					ProjectRef = D7CEC23C17E269BD0029E716 /* MBProgressHUD.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D72A842017D8598D002E3E60 /* myTime */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D7CEC24117E269BD0029E716 /* libMBProgressHUD.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMBProgressHUD.a;
+			remoteRef = D7CEC24017E269BD0029E716 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D72A841F17D8598D002E3E60 /* Resources */ = {
@@ -292,6 +330,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myTime/myTime-Prefix.pch";
 				INFOPLIST_FILE = "myTime/myTime-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F3522DB-ADE2-4E53-9485-2263746B8596";
 				WRAPPER_EXTENSION = app;
@@ -305,6 +344,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myTime/myTime-Prefix.pch";
 				INFOPLIST_FILE = "myTime/myTime-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F3522DB-ADE2-4E53-9485-2263746B8596";
 				WRAPPER_EXTENSION = app;

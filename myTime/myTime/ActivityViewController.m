@@ -9,6 +9,7 @@
 #import "ActivityViewController.h"
 #import "TimeSheetEntry.h"
 #import "DBUtil.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 
 
@@ -26,9 +27,9 @@ typedef enum {
     ActivityStatus _currentActivityStatus;
 }
 
-- (IBAction)changeMyStatus:(id)sender;
+- (void)changeMyStatus:(id)sender;
 - (void)createNewEntry;
-- (IBAction)viewTapped:(UITapGestureRecognizer *)sender;
+- (void)viewTapped:(UITapGestureRecognizer *)sender;
 
 @end
 
@@ -60,7 +61,7 @@ typedef enum {
 }
 
 
-- (IBAction)changeMyStatus:(id)sender {
+- (void)changeMyStatus:(id)sender {
     
     if(_tfProject.text.length == 0 || _tvSubtask.text.length == 0) {
         UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Hiányos adatok" message:@"Project vagy subtask hiányzik." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -80,6 +81,12 @@ typedef enum {
             _tvSubtask.alpha = ALPHA_WHEN_WORKING;
             
             [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
+            
+            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Dolgozom...";
+            
             
             
         } else if(_currentActivityStatus == kActivityStatusWorkingOnProject) {
@@ -108,9 +115,14 @@ typedef enum {
     
 }
 
-- (IBAction)viewTapped:(UITapGestureRecognizer *)sender {
+- (void)viewTapped:(UITapGestureRecognizer *)sender {
     
-    [self.view endEditing:YES];
+    if([sender isEqual:_btnActivity]) {
+        [self changeMyStatus:_btnActivity];
+    } else {
+    
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)createEntryWithDate:(NSDate *)someDate {
@@ -165,6 +177,12 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    [_btnActivity addTarget:self action:@selector(changeMyStatus:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+//    UITapGestureRecognizer *rec = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewTapped:)];
+//    [self.view addGestureRecognizer:rec];
+//    
     _tvSubtask.text = nil;
     
 	
