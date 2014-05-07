@@ -10,6 +10,7 @@
 #import "TimeSheetEntry.h"
 #import "DBUtil.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "StatusDisplayViewController.h"
 
 
 
@@ -83,9 +84,16 @@ typedef enum {
             [_btnActivity setTitle:@"Szünetet tartok" forState:UIControlStateNormal];
             
             
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"Dolgozom...";
+//            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            hud.mode = MBProgressHUDModeIndeterminate;
+//            hud.labelText = @"Dolgozom...";
+//            NSLog(@"HUD: %@", hud);
+//            
+//            CGRect frame = hud.frame;
+//            frame.size.width = 80.0f;
+//            frame.size.height = 80.0f;
+//            
+//            hud.frame = frame;
             
             
             

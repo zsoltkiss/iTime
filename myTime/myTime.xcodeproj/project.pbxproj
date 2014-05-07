@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43E05C45191A63C30038514D /* StatusDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E05C44191A63C30038514D /* StatusDisplayViewController.m */; };
 		D70CC53D17DBE6A800F3A393 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D70CC53C17DBE6A800F3A393 /* CoreData.framework */; };
 		D70CC54117DBE6FC00F3A393 /* myTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D70CC53F17DBE6FC00F3A393 /* myTime.xcdatamodeld */; };
 		D70CC54517DBE9E200F3A393 /* TimeSheetEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D70CC54417DBE9E200F3A393 /* TimeSheetEntry.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43E05C43191A63C30038514D /* StatusDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusDisplayViewController.h; path = Components/StatusDisplayViewController.h; sourceTree = "<group>"; };
+		43E05C44191A63C30038514D /* StatusDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusDisplayViewController.m; path = Components/StatusDisplayViewController.m; sourceTree = "<group>"; };
 		D70CC53C17DBE6A800F3A393 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D70CC54017DBE6FC00F3A393 /* myTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myTime.xcdatamodel; sourceTree = "<group>"; };
 		D70CC54317DBE9E200F3A393 /* TimeSheetEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSheetEntry.h; sourceTree = "<group>"; };
@@ -80,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43E05C41191A63390038514D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				43E05C43191A63C30038514D /* StatusDisplayViewController.h */,
+				43E05C44191A63C30038514D /* StatusDisplayViewController.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		D70CC54217DBE7CC00F3A393 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +133,7 @@
 		D72A842B17D8598D002E3E60 /* myTime */ = {
 			isa = PBXGroup;
 			children = (
+				43E05C41191A63390038514D /* Components */,
 				D70CC54217DBE7CC00F3A393 /* Entities */,
 				D72A843417D8598D002E3E60 /* AppDelegate.h */,
 				D72A843517D8598D002E3E60 /* AppDelegate.m */,
@@ -242,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72A843217D8598D002E3E60 /* main.m in Sources */,
+				43E05C45191A63C30038514D /* StatusDisplayViewController.m in Sources */,
 				D72A843617D8598D002E3E60 /* AppDelegate.m in Sources */,
 				D78711AD17D85DC2006CF12D /* ProjectSummaryViewController.m in Sources */,
 				D78711B417D861FB006CF12D /* ActivityViewController.m in Sources */,
@@ -330,7 +344,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myTime/myTime-Prefix.pch";
 				INFOPLIST_FILE = "myTime/myTime-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F3522DB-ADE2-4E53-9485-2263746B8596";
 				WRAPPER_EXTENSION = app;
@@ -344,7 +358,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myTime/myTime-Prefix.pch";
 				INFOPLIST_FILE = "myTime/myTime-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F3522DB-ADE2-4E53-9485-2263746B8596";
 				WRAPPER_EXTENSION = app;
